@@ -47,3 +47,25 @@ class SquareToCircle(PPTXScene):
         self.endSlide()
         self.play(FadeOut(square))
         self.endSlide()
+
+# define the set of slides you want
+slides = [
+    TitleSlide,
+    TOC,
+    SquareToCircle
+]
+
+class Slides(*slides):
+
+    def setup(self):
+        # setup each scene
+        for s in slides:
+            s.setup(self)
+
+    def construct(self):
+        # play each scene
+        for s in slides:
+            s.construct(self)
+            # if there are any objects left at the end of the animation, remove them!
+            if len(self.mobjects) >= 1:
+                self.remove(*self.mobjects)
